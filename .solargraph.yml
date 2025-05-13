@@ -1,0 +1,49 @@
+# .solargraph.yml
+
+# Specifies which folders Solargraph should index (default is current dir)
+include:
+  - "./*.rb"
+
+# Files or directories to exclude from indexing (speeds up and avoids noise)
+exclude:
+  - spec/**/spec_helper.rb
+  - test/**/test_helper.rb
+  - db/schema.rb
+  - node_modules
+  - vendor
+  - tmp
+  - log
+
+# Enables automatic require path mapping for gems and libraries
+require_paths:
+  - lib
+
+# Enables type checking (optional, can be heavy for large projects)
+reporters:
+  - rubocop
+
+# Recommended for Rails apps or any project with external dependencies
+plugins:
+  - solargraph-rails
+  - solargraph-reek
+  - solargraph-yard
+
+# Set to true to automatically update the gem map when gems change
+max_files: 5000
+
+# Use bundler to load environment if a Gemfile is found
+bundler: true
+
+# This ensures Solargraph is aware of the project environment
+workspace:
+  # Workspace root (usually auto-detected)
+  root: .
+
+# Use this if you want to silence some diagnostics
+diagnostics: true
+
+# Optional: Avoid indexing test/spec files
+skip_files:
+  - "**/*_spec.rb"
+  - "**/test_*.rb"
+
