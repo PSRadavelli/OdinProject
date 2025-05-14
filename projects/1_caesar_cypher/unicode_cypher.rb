@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# My implementation of caesar cypher project using unicode instead of shifting
+
+require 'highline/import'
+
 def unicode_cipher(text, key)
   text.downcase.codepoints.map { |char| (char + key).chr }.join
 end
@@ -8,20 +12,15 @@ def unicode_decipher(text, key)
   text.codepoints.map { |char| (char - key).chr }.join
 end
 
-def prompt(message)
-  print "#{message}: "
-  gets.chomp
-end
-
 def encrypt
-  text = prompt('Insert the text')
-  key = prompt('Now insert the key to use in the cryptography').to_i
+  text = ask('Insert the text')
+  key = ask('Now insert the key to use in the cryptography').to_i
   puts "Cryptographed text: #{unicode_cipher(text, key)}"
 end
 
 def decrypt
-  encrypted_text = prompt('Insert the encrypted message')
-  key = prompt('Now insert the number key of the encryption').to_i
+  encrypted_text = ask('Insert the encrypted message')
+  key = ask('Now insert the number key of the encryption').to_i
   puts "The message is: #{unicode_decipher(encrypted_text, key)}"
 end
 
